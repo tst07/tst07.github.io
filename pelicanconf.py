@@ -25,6 +25,9 @@ MAIN_MENU = True
 PYGMENTS_STYLE = 'emacs'
 PYGMENTS_STYLE_DARK = 'monokai'
 
+# Plugins
+PLUGINS = ['tipue_search']
+
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
@@ -41,7 +44,7 @@ DATE_FORMATS = {
 COPYRIGHT_YEAR = datetime.now().year
 
 # Blogroll
-LINKS = (("Portfolio", "https://prakharmishra.com"),
+LINKS = (
          ('Home', '#'),
          ('Categories', '#'),
          ('Tags', '#'),
