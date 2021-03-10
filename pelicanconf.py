@@ -27,7 +27,7 @@ PYGMENTS_STYLE_DARK = 'monokai'
 
 # Plugins
 PLUGINS = ['tipue_search']
-
+GOOGLE_ANALYTICS = "G-7VG50KL3E5"
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
