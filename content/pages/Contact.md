@@ -6,4 +6,8 @@ Author: Prakhar Mishra
 Summary: Contact Info.
 
 
-The Contact Page for the blog.
+Thank you for taking time to visit my internet home! If you want to connect further:
+
++ Send an invite on LinkedIn: [LinkedIn](https://www.linkedin.com/in/prakhar1467-11)
++ Send DM on Instagram: [Instagram](https://www.instagram.com/prakhar1467)
++ Drop me a mail at: [prakharmishra2593@gmail.com](prakharmishra2593@gmail.com)

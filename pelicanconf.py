@@ -67,6 +67,7 @@ SOCIAL = (
     ("linkedin", "https://www.linkedin.com/in/prakhar1467-11"),
     ("github", "https://github.com/tst07"),
     ("youtube", "https://www.youtube.com/channel/UC4J1E1YPJy8PH0F1rnOaYfQ"),
+    ("instagram", "https://www.instagram.com/prakhar1467")
 )
 
 MENUITEMS = (
