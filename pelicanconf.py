@@ -43,13 +43,25 @@ DATE_FORMATS = {
 
 COPYRIGHT_YEAR = datetime.now().year
 
+# Catagories
+USE_FOLDER_AS_CATEGORY = True
+
+# Blogs
+ARTICLE_PATHS = ['articles',]
+ARTICLE_URL = 'articles/{slug}.html'
+ARTICLE_SAVE_AS = 'articles/{slug}.html'
+
 # Blogroll
+DISPLAY_CATEGORIES_ON_MENU = False
+DISPLAY_PAGES_ON_MENU = False
+
+
 LINKS = (
-         ('Home', '#'),
-         ('Categories', '#'),
-         ('Tags', '#'),
-         ('About', '#'),
-         ('Contact', '#'))
+         ('Home', '/'),
+         ('Categories', '/categories.html'),
+         ('Tags', '/tags.html'),
+         ('About', '/pages/About.html'), 
+         ('Contact', '/pages/Contact.html'),)
 
 SOCIAL = (
     ("linkedin", "https://www.linkedin.com/in/prakhar1467-11"),
@@ -58,9 +70,10 @@ SOCIAL = (
 )
 
 MENUITEMS = (
+    ("Code", "/category/programming.html"),
+    ("Life", "/category/life.html"),
+    ("Music", "/category/music.html"),
     ("Archives", "/archives.html"),
-    ("Categories", "/categories.html"),
-    ("Tags", "/tags.html"),
 )
 
 
