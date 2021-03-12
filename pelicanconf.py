@@ -27,6 +27,9 @@ PYGMENTS_STYLE_DARK = 'monokai'
 
 # Plugins
 PLUGINS = ['tipue_search']
+DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives', 'search', ))
+
+# Analytics
 GOOGLE_ANALYTICS = "UA-191819273-1"
 
 # Feed generation is usually not desired when developing

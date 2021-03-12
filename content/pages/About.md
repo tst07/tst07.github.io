@@ -6,8 +6,8 @@ Author: Prakhar Mishra
 Summary: Who am I.
 
 
-Hi! My name is Prakhar and welcome to my website. While choosing Software Engineering as my professional career, I am also interested in Music (Both listening and playing),
-Cinematography, writing and Storytelling. I have huge fascination for art, whether it is drawing a cartoon on paper with a ball pen or a ten year long Anime, I am all for it.
+Hi! My name is Prakhar and welcome to my website. While choosing Software Engineering as my professional career, I am also interested in music (both listening and playing), cinematography, writing 
+and storytelling. I have huge fascination for art, whether it is drawing a cartoon on paper with a ball pen or a ten year long anime, I am all for it.
 If you are an artist who plays music/likes drawing/do comedy or involve in any creative endeavour, I am already a fan of you and will always root for you!
 
 To have light hearted time, I usually watch a podcast/watch some comic videos or sometimes watch a movie or tv series recommended by my friends. Even better if I have some friends with me
