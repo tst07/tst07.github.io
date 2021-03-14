@@ -1,0 +1,30 @@
+Title: Fixing Host Header Injection in Flask/Nginx setup
+Date: 2021-03-14
+Tags:  security, flask, django, nginx
+Slug: host-header-injection-1
+Authors: Prakhar Mishra
+Summary: How to fix host header injection in your application which uses flask and nginx
+
+Host header injection is a very common vulnerability found in today's websites. An adversary could use this attack to poison the host header and further carry out malicious activities on the victim.
+In Http request-response model, host header is one of the header found in request made by client. Sometimes web servers use this header information to redirect the request to appropriate application
+running on some port in the server, sometimes web application use this header to create absolute urls added in thier rounting file (such as urls.py file in Django). The issue is, since the host header
+is sent by client, we can never trust this data to make server side decisions. 
+
+Two of the most severe attacks an adversary can do are:
+
+1. Password reset poisoning.
+2. Web cache poisoning.
+
+Other kind of security breaches can also be done on top of this vulnerablity. For an example, an attacker can get the secret token to reset a user's password by passing malicious header. The web 
+application will create an absolute URL with the malicious host header and send it to the user's mail. If user happens to click on that reset link which he recieved in his/her mail out of nowhere,
+User will pass that secret token to an attacker controlled host. 
+
+To mitigate this, there are two kinds of check which we can apply:
++ Whitelist hosts in our web application.
++ Whitelist hosts in our web server (Our nginx server).
+
+Some frameworks such as Django provide configuration variable in settings file while in other framworks we have to check the host header before we process any request. In Django, the setting variable
+is ALLOWED_HOSTS = [], where we have to provide host names as a list. But more than often, people put an astrix '*' in that list and carry on this to the production. I advice you to put your IP address
+or domain name or both in that list and then go for production. This will fix the issue at application level and you will be free of this vulnerability.
+
+In Flask, We have a decorator named 

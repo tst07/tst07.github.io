@@ -55,7 +55,7 @@ AUTHOR_FEED_ATOM = None
 RSS_FEED_SUMMARY_ONLY = False
 
 DATE_FORMATS = {
-    "en": "%B %d, %Y",
+    "en": "%B %d %Y",
 }
 
 COPYRIGHT_YEAR = datetime.now().year

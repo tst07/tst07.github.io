@@ -53,25 +53,27 @@
 <!-- End Google Analytics -->
 
 <meta name="author" content="Prakhar Mishra" />
-<meta name="description" content="This is what start of a great thing looks like." />
-<meta name="keywords" content="first, misc">
+<meta name="description" content="How to fix host header injection in your application which uses flask and nginx" />
+<meta name="keywords" content="security, flask, django, nginx">
 
 
 <meta property="og:site_name" content="Prakhar Mishra"/>
-<meta property="og:title" content="My First Post"/>
-<meta property="og:description" content="This is what start of a great thing looks like."/>
+<meta property="og:title" content="Fixing Host Header Injection in Flask/Nginx setup"/>
+<meta property="og:description" content="How to fix host header injection in your application which uses flask and nginx"/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="/articles/My-first-post.html"/>
+<meta property="og:url" content="/articles/host-header-injection-1.html"/>
 <meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2021-03-10 01:01:00+05:30"/>
-<meta property="article:modified_time" content="2021-03-10 01:01:00+05:30"/>
+<meta property="article:published_time" content="2021-03-14 00:00:00+05:30"/>
+<meta property="article:modified_time" content=""/>
 <meta property="article:author" content="/author/prakhar-mishra.html">
-<meta property="article:section" content="misc"/>
-<meta property="article:tag" content="first"/>
-<meta property="article:tag" content="misc"/>
+<meta property="article:section" content="programming"/>
+<meta property="article:tag" content="security"/>
+<meta property="article:tag" content="flask"/>
+<meta property="article:tag" content="django"/>
+<meta property="article:tag" content="nginx"/>
 <meta property="og:image" content="/images/prakhar.jpeg">
 
-  <title>Prakhar Mishra &ndash; My First Post</title>
+  <title>Prakhar Mishra &ndash; Fixing Host Header Injection in Flask/Nginx setup</title>
 
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <script>
@@ -170,22 +172,73 @@
 <article class="single">
   <header>
       
-    <h1 id="My-first-post">My First Post</h1>
+    <h1 id="host-header-injection-1">Fixing Host Header Injection in Flask/Nginx setup</h1>
     <p>
-      Posted on 3月 10 2021 in <a href="/category/misc.html">misc</a>
+      Posted on 3月 14 2021 in <a href="/category/programming.html">programming</a>
 
     </p>
   </header>
 
 
   <div>
-    <p>This is the <em>first post</em>. <strong>YAY!</strong>
-<img alt="Write here a good description for people who can't see the image" src="/images/dark.jpg"></p>
+    <p>Host header injection is a very common vulnerability found in today's websites. An adversary could use this attack to poison the host header and further carry out malicious activities on the victim.
+In Http request-response model, host header is one of the header found in request made by client. Sometimes web servers use this header information to redirect the request to appropriate application
+running on some port in the server, sometimes web application use this header to create absolute urls added in thier rounting file (such as urls.py file in Django). The issue is, since the host header
+is sent by client, we can never trust this data to make server side decisions. </p>
+<p>Two of the most severe attacks an adversary can do are:</p>
+<ol>
+<li>Password reset poisoning.</li>
+<li>Web cache poisoning.</li>
+</ol>
+<p>Other kind of security breaches can also be done on top of this vulnerablity. For an example, an attacker can get the secret token to reset a user's password by passing malicious header. The web 
+application will then create an absolute URL with malicious header which has the secret token and send the password reset link to the real user's mail. 
+If user happens to click on that reset link which is recieved in his/her mail out of nowhere, User will pass that secret token to an attacker controlled host. </p>
+<p>To mitigate this, there are two kinds of check which we can apply:</p>
+<ul>
+<li>Whitelist hosts in our web application.</li>
+<li>Whitelist hosts in our web server conf. (Our nginx server).</li>
+</ul>
+<p>Some frameworks such as Django provide configuration variable in settings file while in other framworks we have to check the host header before we process any request. In Django, the setting variable
+is <code>ALLOWED_HOSTS = []</code>, where we have to provide host names as a list. But more than often, people put an astrix '*' in that list and carry on this to the production. I advice you to put your IP address
+or domain name or both in that list and then go for production. This will fix the issue at application level and you will be free of this vulnerability.</p>
+<p>In Flask, We have a decorator named <code>@app.before_request</code> which allows us to manipulate and validate any requests coming to the server. </p>
+<div class="highlight"><pre><span></span><code><span class="nd">@app</span><span class="o">.</span><span class="n">before_request</span>
+<span class="k">def</span> <span class="nf">check_for_maintenance</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">host</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;10.x.y.z&#39;</span><span class="p">,</span> <span class="s1">&#39;www.mywebsite.com&#39;</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;_site/403.html&#39;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">IS_MAINTENANCE_MODE</span> <span class="ow">and</span> <span class="n">request</span><span class="o">.</span><span class="n">path</span> <span class="o">!=</span> <span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;maintenance&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;maintenance&#39;</span><span class="p">))</span>
+</code></pre></div>
+
+<p>This is how we handle and fix the issue using flask/django. Now let's discuss how we can block maliciouos headers using our nginx:</p>
+<ol>
+<li>Open your nginx.conf file (in my case path is <code>/usr/local/conf/nginx.conf</code>)</li>
+<li>Add the below code in your server block:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>server <span class="o">{</span>
+    listen <span class="m">443</span> ssl<span class="p">;</span>
+    ...
+    ...
+
+    <span class="c1"># Deny bad headers</span>
+    <span class="k">if</span> <span class="o">(</span><span class="nv">$host</span> !~* ^<span class="o">(</span>www.mywebsite.com<span class="o">)</span>$ <span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="m">444</span><span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>Voila, you are good to go. Now nginx is not gonna accept any header other than your mentioned whitelisted one.
+I hope you found this blog helpful, write in the comments if you have any doubts or if you get stuck somewhere. Thanks for reading this, and I will see you in the next one!</p>
+<hr>
+<p><strong> DISCLAIMER: </strong> The author doesn't intend to be expert on the problems. While these notes will solve your problem at hand, it is always advised to dig deep to the problem if one is interested and also share
+your further learnings in the comments below as well.</p>
   </div>
   <div class="tag-cloud">
     <p>
-      <a href="/tag/first.html">first</a>
-      <a href="/tag/misc.html">misc</a>
+      <a href="/tag/security.html">security</a>
+      <a href="/tag/flask.html">flask</a>
+      <a href="/tag/django.html">django</a>
+      <a href="/tag/nginx.html">nginx</a>
     </p>
   </div>
 
