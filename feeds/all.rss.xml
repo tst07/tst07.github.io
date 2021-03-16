@@ -3,7 +3,7 @@
 But having said this, software design patterns are one of the most awesome things there in software development that show true power of object oriented programming and provide 'neat' solution
 to the coding challenges. While writing code, the probability to be working on an original problem is very slim, It's almost certain that some other programmer was also faced with the same problem in 
 history and they had to write the solution for that. Over time many programmers found these repeated problems and decided to generalise the solution and coding style which we now call as the great
-DESGIN PATTERNS!&lt;/p&gt;
+DESIGN PATTERNS!&lt;/p&gt;
 &lt;p&gt;These are the language which all programmers understand to quickly catch up with each other in terms of code. &lt;/p&gt;
 &lt;p&gt;&lt;strong&gt; Programmer1: &lt;/strong&gt;  "We have implemented this using decorator pattern."&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt; New hired programmer: &lt;/strong&gt; "Ohh I know that! let me check out the code and see how the use case is molded to fit in the pattern!"&lt;/p&gt;
@@ -86,6 +86,8 @@ which can contain leaf nodes or more directory nodes. Perfect for composite patt
     &lt;span class="n"&gt;opt&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;operation&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
+&lt;p&gt;This was my implementation of linux file tree using python, Try to run this on your machine and do tweaks and extensions as per your imagination.
+I will see you in the next one!&lt;/p&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;strong&gt; DISCLAIMER: &lt;/strong&gt; The author doesn't intend to be expert on the problems. While these notes will solve your problem at hand, it is always advised to dig deep to the problem if one is interested and also share
 your further learnings in the comments below as well.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Prakhar Mishra</dc:creator><pubDate>Tue, 16 Mar 2021 00:00:00 +0530</pubDate><guid isPermaLink="false">tag:prakharmishra.com,2021-03-16:/articles/composite-pattern-using-python.html</guid><category>programming</category><category>design-patterns</category><category>python</category></item><item><title>Encrypt Sensitive Data Using AES before sending to server over Http/s (Javascript, Python)</title><link>https://prakharmishra.com/articles/aes-encrypt-user-password-over-http.html</link><description>&lt;p&gt;Often times software developers are found creating user authentication for their website. Most of the times they build the complete end to end systems which includes strong password policies, 
