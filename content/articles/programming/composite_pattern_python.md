@@ -10,7 +10,7 @@ Composite pattern is a structural design patt...... Pfft! I am no good with defi
 But having said this, software design patterns are one of the most awesome things there in software development that show true power of object oriented programming and provide 'neat' solution
 to the coding challenges. While writing code, the probability to be working on an original problem is very slim, It's almost certain that some other programmer was also faced with the same problem in 
 history and they had to write the solution for that. Over time many programmers found these repeated problems and decided to generalise the solution and coding style which we now call as the great
-DESGIN PATTERNS!
+DESIGN PATTERNS!
 
 These are the language which all programmers understand to quickly catch up with each other in terms of code. 
 
@@ -107,6 +107,8 @@ if __name__ == '__main__':
 
 ```
 
+This was my implementation of linux file tree using python, Try to run this on your machine and do tweaks and extensions as per your imagination.
+I will see you in the next one!
 
 ___
 
