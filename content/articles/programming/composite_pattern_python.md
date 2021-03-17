@@ -113,7 +113,7 @@ I will see you in the next one!
 
 ** Related Links **
 
-[Design Patterns - Composite Pattern Implementation Using C++](https://prakharmishra.com/articles/articles/composite-pattern-using-cpp.html#composite-pattern-using-cpp)
+[Design Patterns - Composite Pattern Implementation Using C++](https://prakharmishra.com/articles/composite-pattern-using-cpp.html#composite-pattern-using-cpp)
 
 ___
 
