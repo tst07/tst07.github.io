@@ -1,6 +1,6 @@
 Title: Design Patterns - Composite Pattern Implementation Using Python
 Date: 16 March 2021
-Tags: design-patterns, python
+Tags: design-patterns, python, interviews, object-oriented-programming
 Slug: composite-pattern-using-python
 Authors: Prakhar Mishra
 Summary: Composite pattern code implementation using python
@@ -109,6 +109,11 @@ if __name__ == '__main__':
 
 This was my implementation of linux file tree using python, Try to run this on your machine and do tweaks and extensions as per your imagination.
 I will see you in the next one!
+
+
+** Related Links **
+
+[Design Patterns - Composite Pattern Implementation Using C++](https://prakharmishra.com/articles/articles/composite-pattern-using-cpp.html#composite-pattern-using-cpp)
 
 ___
 
