@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="/theme/stylesheet/style.min.css">
+
+    <link id="dark-theme-style" rel="stylesheet" type="text/css"
+          media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
+    href="/theme/stylesheet/dark-theme.min.css">
+
+    <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
+          href="/theme/pygments/monokai.min.css">
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: light)"
+          href="/theme/pygments/emacs.min.css">
+
+    <script src="/theme/tipuesearch/jquery.min.js"></script>
+    <script src="/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script src="/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script src="/theme/tipuesearch/tipuesearch_set.min.js"></script>
+    <script src="/tipuesearch_content.js"></script>
+    <link rel="stylesheet" href="/theme/tipuesearch/tipuesearch.min.css" />
+
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="/theme/font-awesome/css/solid.css">
+
+
+    <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Prakhar Mishra Atom">
+
+    <link href="/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="Prakhar Mishra RSS">
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-191819273-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="Prakhar Mishra" />
+<meta name="description" content="In this article author discusses about the basic terminologies of spark and how to compute the cluster hardware to run the spark jobs efficiently." />
+<meta name="keywords" content="pyspark">
+
+
+<meta property="og:site_name" content="Prakhar Mishra"/>
+<meta property="og:title" content="Pyspark: Basics And Computation Of Cluster Strength for Spark Jobs"/>
+<meta property="og:description" content="In this article author discusses about the basic terminologies of spark and how to compute the cluster hardware to run the spark jobs efficiently."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="/articles/pyspark_basics_and_computing_cluster_requirement_for_jobs.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2021-03-27 00:00:00+05:30"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="/author/prakhar-mishra.html">
+<meta property="article:section" content="programming"/>
+<meta property="article:tag" content="pyspark"/>
+<meta property="og:image" content="/images/prakhar.jpeg">
+
+  <title>Prakhar Mishra &ndash; Pyspark: Basics And Computation Of Cluster Strength for Spark Jobs</title>
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8793729856692815",
+      enable_page_level_ads: true
+    });
+  </script>
+</head>
+<body >
+  <aside>
+    <div>
+      <a href="">
+        <img src="/images/prakhar.jpeg" alt="Prakhar Mishra" title="Prakhar Mishra">
+      </a>
+
+      <h1>
+        <a href="">Prakhar Mishra</a>
+      </h1>
+
+<p>Software Engineer</p>
+        <form class="navbar-search" action="/search.html" role="search">
+          <input type="text" name="q" id="tipue_search_input" placeholder="Search...">
+        </form>
+
+      <nav>
+        <ul class="list">
+
+
+
+            <li>
+              <a target="_self" href="/" >Home</a>
+            </li>
+            <li>
+              <a target="_self" href="/categories.html" >Categories</a>
+            </li>
+            <li>
+              <a target="_self" href="/tags.html" >Tags</a>
+            </li>
+            <li>
+              <a target="_self" href="/pages/About.html" >About</a>
+            </li>
+            <li>
+              <a target="_self" href="/pages/Contact.html" >Contact</a>
+            </li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/prakhar1467-11" target="_blank">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-github" href="https://github.com/tst07" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-youtube" href="https://www.youtube.com/channel/UC4J1E1YPJy8PH0F1rnOaYfQ" target="_blank">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-instagram" href="https://www.instagram.com/prakhar1467" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <ins class="adsbygoogle ads-aside"
+           data-ad-client="ca-pub-8793729856692815"
+           data-ad-slot="1234561"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+  </aside>
+  <main>
+
+    <nav>
+      <a href="">Home</a>
+
+      <a href="/category/programming.html">Code</a>
+      <a href="/category/life.html">Life</a>
+      <a href="/category/music.html">Music</a>
+      <a href="/archives.html">Archives</a>
+
+      <a href="/feeds/all.atom.xml">Atom</a>
+
+      <a href="/feeds/all.rss.xml">RSS</a>
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="pyspark_basics_and_computing_cluster_requirement_for_jobs">Pyspark: Basics And Computation Of Cluster Strength for Spark Jobs</h1>
+    <p>
+      Posted on 3月 27 2021 in <a href="/category/programming.html">programming</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>When I started on working with pyspark to explore big data horizon, I was told by the experienced engineers the dos and donts of running a spark project. I was supposed to follow their rules until I
+get good enough and understand the underlying intrinsic details of spark so that I don't fuck up the project and give my teammates some sleepless nights :)</p>
+<p>Luckily it didn't happen and now that I have gathered the knowledge, Its time to give back to my fellow engineers who are starting their big data journey. When starting out, my collegue told me that
+whenever you write an instruction, whether a transformation/collection or a loading functions in your code, always ask yourself if this will be able to run on a single machine itself. This will help
+you keep away from traditional programming logics and everything else would follow with googling and figuring out how to do the task in distributed manner.</p>
+<p>In this article, Let's discuss some spark terminologies and figure out what cluster requirements are for runnning our spark jobs efficiently.</p>
+<h3>Cluster:</h3>
+<p>Cluster is nothing but a set of computers dedicated to run our spark job on huge data. It can comprise of multiple servers, each server can be multicore and with some dedicated memory to it.
+Let's say we have a cluster of 10 nodes, each node has 16 cores and 64GB RAM attached to it.</p>
+<h3>RDD:</h3>
+<p>RDD stands for resilient distributed dataset, which is more often called the fundamental data structure of spark. Think of RDD as a large data which will be first loaded and then divided into partitions
+by spark to achieve parallel execution on these partitions. RDD can be loaded to spark from HDFS, Database or from a huge file sitting in a disk. </p>
+<h3>DataFrame:</h3>
+<p>DataFrame is API written over RDD, which is used when you have structured data (data for which you can imagine a schema). While stored data can be very chaotic, if you happend to have a schema based 
+dataset, it is highly recommended to not use RDD and use DataFrame API since it already has many optimizations out of the box.</p>
+<h3>Partition:</h3>
+<p>The smallest unit of large data which goes to the cluster and gets modified or transformed by spark job! Suppose we have a 200G file which is loaded in our rdd, spark is going to divide the RDD into 
+chunks of 128MB size partitions and perform the operations parallely on these chunks by sending them to various nodes in our cluster. Ideally partition size should not exceed more than 128MB.
+So for a 200G file, number of partitions will be 200*1024/128 = ~1600</p>
+<h3>Task:</h3>
+<p>Task is a unit of work which will be done on a partition. One can have as many tasks as number of partitions, which will enable parallel execution of all partitions in same 'stage' (more on stage later).
+If you have more tasks available than partitions, then some will be idle. If you have less tasks than partitions then some partitions will have to wait for the tasks to finish their existing work 
+and then pick them up.</p>
+<h3>Executor:</h3>
+<p>An executor is a process which combined with other identical executers run on a single server. Yes, that is correct, a single machine in a cluster can have multiple executors. Each executor can have
+capacity of running multiple tasks. Number of tasks and number of executor in a machine depend on the machine's CPU cores.
+For best practices, an executor is not assigned more than 5 cores. So suppose you have 32 core machine, then you can run 32/5 = 6 executors in that machine. Assigning more cores to an executor is shown
+to slow down the jobs significantly. So remember this, 5 or less cores per executor!!! Which will correlate to running 5 or less tasks per executor.
+We will further read about the 'shuffle block' and HDFS also performs best with 5 task per executor.</p>
+<ul>
+<li>
+<p>For an example, we have cluster of 10 machines, each have 32 Core CPU and 64 GB memory. Let's derive how many executors and tasks we will be able to run parallel.</p>
+</li>
+<li>
+<p>As we discussed earlier, number of executors per machine is 32/5 = ~6. </p>
+</li>
+<li>
+<p>How much memory each executor will have? Answer is 64G/6 = ~10 GB.</p>
+</li>
+<li>
+<p>So, how many total executors will be available across cluser? no_of_executor_in_single_machine * no_of_machines =  6 * 10 = 60</p>
+</li>
+<li>
+<p>How many tasks we will have at hand at a time? no_of_executors*no_of_cores_per_executor = 60 * 5 = 300 tasks!</p>
+</li>
+</ul>
+<p>One more thing that we need to be careful about is that our executors should not transfer more than 2G data to each other. Otherwise we will see 'size limit exceed' error while running our jobs. 
+This transfer of data between executors across stages is called <strong> Shuffle Block </strong>. Normally when you are using 5 cores per executor and partitions are 128MB, this problem won't arise.</p>
+<h3>Worker:</h3>
+<p>Each node in cluster will have single worker. This worker will manage all the executors running in that node and contact with cluster manager about the availability of executors. Each application or job
+run will have it's own set of executors. One can think of running more than one worker instance in a node, but it simply isn't effective in improving efficiency since it is merly used for tracking 
+executors and contacting cluster manager.</p>
+<h3>Cluster Manager:</h3>
+<p>Spark can use various cluster manager such as yarn, mesos or standalone. In Spark's standalone CM, you can see job statistics, information about executors, memory consumption, concurrent running tasks 
+etc. Worker instance has the responsibility of communication with cluster manager about the availability of it's resources. Once an executor is assigned to the job, it can directly communicate with 
+driver job without interfering with worker or cluster manager.</p>
+<h2>How spark runs a job:</h2>
+<p>You can tell spark that it's lazy without hurting it's feelings. Spark delays execution of tasks as long as it can. All data transformation steps which we are writing are not happening until we 
+explicitly ask to collect our output or the next stage of job depend on the results of previous stage. Behind the scenes spark creates a directed acyclic graph containing all the operations, then
+proceeds to run that in stages. It optimizes the number of as many tasks which can run parallel in one stage, and then pass the output of the stage to next and proceeds to run next stage similarly.
+In more stepwise manner, this is what happens when we run our job:</p>
+<ul>
+<li>Spark builds a DAG according to our job.</li>
+<li>Split the graph into stages of tasks.</li>
+<li>Run first stage tasks with help of cluster manager to assign executors</li>
+<li>collect back results from executors as output or proceed to next stage with results.</li>
+<li>And so on..</li>
+</ul>
+<p>While complete workflow can get much more complex including retrying failed tasks, scheduling tasks. This is the most simplistic way on how spark workflow happens behind the scenes.
+I hope you enjoyed this blog and got basic idea about the workings of spark. I will see you in the next one!!</p>
+<hr>
+<p><strong> DISCLAIMER: </strong> The author doesn't intend to be expert on the problems. While these notes will solve your problem at hand, it is always advised to dig deep to the problem if one is interested and also share
+your further learnings in the comments below as well.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="/tag/pyspark.html">pyspark</a>
+    </p>
+  </div>
+
+
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-8793729856692815"
+         data-ad-slot="1234566"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+</article>
+
+    <footer>
+<p>&copy; 2021 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script id="dark-theme-script"
+          src="/theme/dark-theme/dark-theme.min.js"
+          data-enable-auto-detect-theme="True"
+          data-default-theme="dark"
+          type="text/javascript">
+  </script>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Prakhar Mishra ",
+  "url" : "",
+  "image": "/images/prakhar.jpeg",
+  "description": "Foo Bar's Thoughts and Writings"
+}
+</script>
+
+    <script>
+      $(document).ready(function() {
+        $('#tipue_search_input').tipuesearch();
+      });
+    </script>
+
+</body>
+</html>
