@@ -1,0 +1,33 @@
+Title: I Wrote My First Song!! 
+Date: 2021-03-30
+Tags: music, originalsong, guitar
+Slug: my_first_song
+Authors: Prakhar Mishra
+Summary: After writing and discarding so many of my songs, this time I gathered the courage to complete one and gave music to it. Despite of being insecure about my bad vocals and my writing to come out as cringy, I went ahead to finish this and let me tell you... It felt great!!
+
+I am learning guitar for past 3 years now. Despite being able to cover the soulful and touching music from my favourite artists, I was never satisfied with just looking at tabs and covering the existing 
+songs. I always wanted to create my own songs and give music to them with the help of guitar. Songwriting is hard. Whenever I tend to write something, I always fear that it will turn out to be cringy. 
+Well if that is not enough, singing is hard too xd. Let me tell you honestly, I am super insecure about my singing and even when I was singing for this, I made sure that my voice can't leave my room and
+be heard by no living soul :D. Numerous times I have started writing and then given up because I thought either it sounded cringe or it was very bland and had no soul. I have gone a bit cold inside that
+I do not feel lot of things very emotionally, but that night I was feeling a bit off with certain things and it hopefully reflected in the song. I was also somewhat satisfied with how it ended up 
+sounding and also with the guitar part. The lesson learned is, I can't write whenever I want to. I have to feel strongly about something only then I can perhaps reflect that in my writing. I will also
+need to find my voice, I have watched some tutorials on youtube and each one has the message that anyone can sing. It takes time and practice to find your own voice. Whether they are right or just
+selling positive vibes, I am willing to try out.
+
+One more thing, the song turned out way different than it sounded in my head. Why was that? I don't know the answer. Maybe the great artists are the ones who are able to close this gap by practicing the skill or
+being innately good with the art. Whatever the case be, I would say that it gives a bit of satisfaction when you take the first step and also knowing you can only get better from here. I don't have any
+knowledge of DAW (digial audio workstation) software, I somehow managed to figure out how to record with simple record, play and pause buttons in ableton. I think the next steps are learning various 
+tools of DAW so I can fine tune the audio which will make it sound even better! If I continue writing new songs and keep learning DAW, it will be so nice to see the difference one day from where 
+I started.
+
+With the hopes of great future I am ending this blog. You can find below the link and listen to the song. As always, Thanks for taking time to read the article, I will see you in the next one!
+
+Please find the video demonstration youtube video link:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/E30TU8OQECs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+** DISCLAIMER: ** The author doesn't intend to be expert on the problems. While these notes will solve your problem at hand, it is always advised to dig deep to the problem if one is interested and also
+share your further learnings in the comments below as well.
+
+
