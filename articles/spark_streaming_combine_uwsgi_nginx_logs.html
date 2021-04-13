@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://prakharmishra.com/theme/stylesheet/style.min.css">
+
+    <link id="dark-theme-style" rel="stylesheet" type="text/css"
+          media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
+    href="https://prakharmishra.com/theme/stylesheet/dark-theme.min.css">
+
+    <link id="pygments-dark-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: dark), (prefers-color-scheme: no-preference)"
+          href="https://prakharmishra.com/theme/pygments/monokai.min.css">
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+              media="(prefers-color-scheme: light)"
+          href="https://prakharmishra.com/theme/pygments/emacs.min.css">
+
+    <script src="https://prakharmishra.com/theme/tipuesearch/jquery.min.js"></script>
+    <script src="https://prakharmishra.com/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script src="https://prakharmishra.com/theme/tipuesearch/tipuesearch.min.js"></script>
+    <script src="https://prakharmishra.com/theme/tipuesearch/tipuesearch_set.min.js"></script>
+    <script src="https://prakharmishra.com/tipuesearch_content.js"></script>
+    <link rel="stylesheet" href="https://prakharmishra.com/theme/tipuesearch/tipuesearch.min.css" />
+
+  <link rel="stylesheet" type="text/css" href="https://prakharmishra.com/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://prakharmishra.com/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://prakharmishra.com/theme/font-awesome/css/solid.css">
+
+
+    <link href="https://prakharmishra.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Prakhar Mishra Atom">
+
+    <link href="https://prakharmishra.com/feeds/all.rss.xml" type="application/rss+xml" rel="alternate" title="Prakhar Mishra RSS">
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-191819273-1', 'auto');
+  ga('send', 'pageview');
+</script>
+<!-- End Google Analytics -->
+
+<meta name="author" content="Prakhar Mishra" />
+<meta name="description" content="In this article we combine uwsgi and nginx logs through spark streaming and get final enriched log stream" />
+<meta name="keywords" content="pyspark">
+
+
+<meta property="og:site_name" content="Prakhar Mishra"/>
+<meta property="og:title" content="Spark Streaming: combine uwsgi and nginx logs to get enriched log stream"/>
+<meta property="og:description" content="In this article we combine uwsgi and nginx logs through spark streaming and get final enriched log stream"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://prakharmishra.com/articles/spark_streaming_combine_uwsgi_nginx_logs.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2021-04-13 00:00:00+05:30"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://prakharmishra.com/author/prakhar-mishra.html">
+<meta property="article:section" content="programming"/>
+<meta property="article:tag" content="pyspark"/>
+<meta property="og:image" content="/images/prakhar.jpeg">
+
+  <title>Prakhar Mishra &ndash; Spark Streaming: combine uwsgi and nginx logs to get enriched log stream</title>
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-8793729856692815",
+      enable_page_level_ads: true
+    });
+  </script>
+</head>
+<body >
+  <aside>
+    <div>
+      <a href="https://prakharmishra.com">
+        <img src="/images/prakhar.jpeg" alt="Prakhar Mishra" title="Prakhar Mishra">
+      </a>
+
+      <h1>
+        <a href="https://prakharmishra.com">Prakhar Mishra</a>
+      </h1>
+
+<p>Software Engineer</p>
+        <form class="navbar-search" action="/search.html" role="search">
+          <input type="text" name="q" id="tipue_search_input" placeholder="Search...">
+        </form>
+
+      <nav>
+        <ul class="list">
+
+
+
+            <li>
+              <a target="_self" href="/" >Home</a>
+            </li>
+            <li>
+              <a target="_self" href="/categories.html" >Categories</a>
+            </li>
+            <li>
+              <a target="_self" href="/tags.html" >Tags</a>
+            </li>
+            <li>
+              <a target="_self" href="/pages/About.html" >About</a>
+            </li>
+            <li>
+              <a target="_self" href="/pages/Contact.html" >Contact</a>
+            </li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+          <li>
+            <a  class="sc-linkedin" href="https://www.linkedin.com/in/prakhar1467-11" target="_blank">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-github" href="https://github.com/tst07" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-youtube" href="https://www.youtube.com/channel/UC4J1E1YPJy8PH0F1rnOaYfQ" target="_blank">
+              <i class="fab fa-youtube"></i>
+            </a>
+          </li>
+          <li>
+            <a  class="sc-instagram" href="https://www.instagram.com/prakhar1467" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </li>
+      </ul>
+    </div>
+
+      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <ins class="adsbygoogle ads-aside"
+           data-ad-client="ca-pub-8793729856692815"
+           data-ad-slot="1234561"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+  </aside>
+  <main>
+
+    <nav>
+      <a href="https://prakharmishra.com">Home</a>
+
+      <a href="/category/programming.html">Code</a>
+      <a href="/category/life.html">Life</a>
+      <a href="/category/music.html">Music</a>
+      <a href="/archives.html">Archives</a>
+
+      <a href="https://prakharmishra.com/feeds/all.atom.xml">Atom</a>
+
+      <a href="https://prakharmishra.com/feeds/all.rss.xml">RSS</a>
+    </nav>
+
+<article class="single">
+  <header>
+      
+    <h1 id="spark_streaming_combine_uwsgi_nginx_logs">Spark Streaming: combine uwsgi and nginx logs to get enriched log stream</h1>
+    <p>
+      Posted on 4月 13 2021 in <a href="https://prakharmishra.com/category/programming.html">programming</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>To get basic understanding of how spark streaming works, we are going to combine nginx(web server) logs and uwsgi logs. Spark streaming can process real time data from file systems, HDFS, TCP socket,
+Kafka etc. I am assuming we have two different log files, uwsgi.log and nginx.log and the logs keep appending to the same file as requests are processed by our webserver and application.</p>
+<p>If we use file system to read stream, we can only read data from files which are created new in our landing path. Once a file is processed in this case, spark does not go back to process again. This
+kind of processing is not suited for our needs since our logs are appended in the same log file. So what we are going to do is, we will read the logs from socket in real time. Now to transfer logs which
+are written in our files to a socket, we will be using folllowing commands:</p>
+<div class="highlight"><pre><span></span><code><span class="err">tail -f uwsgi.log | nc -lk 9999</span>
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="err">tail -f nginx.log | nc -lk 9990</span>
+</code></pre></div>
+
+<p>This will watch for any logs which are appended to our log files and write to port 9999 and 9990 respectively.
+Now we need to read the socket stream in our spark code. To do this, let's first initiate spark streaming context (ssc) with the help of spark context (sc). I will be joining both streams with help
+of IP address then we will also filter out the values where url is not equal. After that we will have our final log stream.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pyspark.streaming</span> <span class="kn">import</span> <span class="n">StreamingContext</span>
+
+<span class="c1"># ...</span>
+<span class="c1"># ...</span>
+
+<span class="k">def</span> <span class="nf">analyze</span><span class="p">(</span><span class="n">sc</span><span class="p">):</span>
+    <span class="n">ssc</span> <span class="o">=</span> <span class="n">StreamingContext</span><span class="p">(</span><span class="n">sc</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="c1"># run batches after every 5 seconds</span>
+
+    <span class="c1"># reading the stream from socket</span>
+    <span class="n">uwsgi_lines</span> <span class="o">=</span> <span class="n">ssc</span><span class="o">.</span><span class="n">socketTextStream</span><span class="p">(</span><span class="n">hostname</span> <span class="o">=</span> <span class="s2">&quot;x.y.z.w&quot;</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="mi">9999</span><span class="p">)</span>
+    <span class="n">uwsgi_lines_wo_static</span> <span class="o">=</span> <span class="n">uwsgi_lines</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="s2">&quot;static&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">line</span> <span class="ow">and</span> <span class="p">(</span><span class="s2">&quot;GET&quot;</span> <span class="ow">in</span> <span class="n">line</span> <span class="ow">or</span> <span class="s2">&quot;POST&quot;</span> <span class="ow">in</span> <span class="n">line</span> <span class="ow">or</span> <span class="s2">&quot;PUT&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">))</span>
+
+    <span class="c1"># Now transform the stream into pairs where first value in pair is equal to IP address. So this will help us joining two streams on basis of first value of pair.</span>
+    <span class="n">line_words</span> <span class="o">=</span> <span class="n">uwsgi_lines_wo_static</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">))</span>
+    <span class="n">refined_uwsgi_logs</span> <span class="o">=</span> <span class="n">line_words</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">line_words</span><span class="p">)))</span> <span class="c1"># for me IP address in 4th index</span>
+
+    <span class="c1"># similarly for nginx we read stream from socket</span>
+    <span class="n">nginx_lines</span> <span class="o">=</span> <span class="n">ssc</span><span class="o">.</span><span class="n">socketTextStream</span><span class="p">(</span><span class="n">hostname</span> <span class="o">=</span> <span class="s2">&quot;x.y.z.w&quot;</span><span class="p">,</span> <span class="n">port</span> <span class="o">=</span> <span class="mi">9990</span><span class="p">)</span>
+    <span class="n">nginx_lines_wo_static</span> <span class="o">=</span> <span class="n">nginx_lines</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="s2">&quot;static&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">line</span> <span class="ow">and</span> <span class="s2">&quot;health&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">line</span> <span class="ow">and</span> <span class="p">(</span><span class="s2">&quot;GET&quot;</span> <span class="ow">in</span> <span class="n">line</span> <span class="ow">or</span> <span class="s2">&quot;POST&quot;</span> <span class="ow">in</span> <span class="n">line</span> <span class="ow">or</span> <span class="s2">&quot;PUT&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">))</span>
+
+    <span class="c1"># Now apply same logic, breaking to pairs</span>
+    <span class="n">ng_line_words</span> <span class="o">=</span> <span class="n">nginx_lines_wo_static</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">))</span>
+    <span class="n">nrefined_logs</span> <span class="o">=</span> <span class="n">ng_line_words</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ng_line_words</span><span class="p">)))</span> <span class="c1"># for me IP address in 2nd index in nginx logs</span>
+
+    <span class="c1"># Now lets join both streams, refined_uwsgi_logs, nrefined_logs</span>
+    <span class="n">joinedStream</span> <span class="o">=</span> <span class="n">refined_uwsgi_logs</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">nrefined_logs</span><span class="p">)</span> <span class="c1"># will join both streams based on first value of each tuple, IP address in our case</span>
+    <span class="n">final_stream_verbose</span> <span class="o">=</span> <span class="n">joinedStream</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">line</span><span class="p">:</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="c1"># removing tuples and keeping only second value of tuple</span>
+    <span class="n">final_stream_words</span> <span class="o">=</span> <span class="n">final_stream_verbose</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">))</span>  <span class="c1"># break into list of words based on spaces between</span>
+
+    <span class="c1"># Let&#39;s equate the URL and requestmethod (GET/POST etc) on joined stream, it will help us remove extra joined items.</span>
+    <span class="n">refined_final_stream_verbose</span> <span class="o">=</span> <span class="n">final_stream_words</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">x</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="ow">and</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="n">x</span><span class="p">[</span><span class="mi">9</span><span class="p">])</span>
+    <span class="n">final</span> <span class="o">=</span> <span class="n">refined_final_stream_verbose</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">7</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">11</span><span class="p">]])</span> <span class="c1"># pick the values we want to keep in final stream</span>
+
+    <span class="n">final</span><span class="o">.</span><span class="n">pprint</span><span class="p">()</span>
+    <span class="n">ssc</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">ssc</span><span class="o">.</span><span class="n">awaitTermination</span><span class="p">()</span>
+</code></pre></div>
+
+<p>So this is how we joined two different stream of logs into one and removed junk lines. We can push the logs to different systems such as write on console, kafka, HDFS etc.
+In new release spark has introduced spark structured streaming where data processed from streams gets written to unbounded table, from there we can apply dataframe operations on our running
+stream and do stateful operations/queries as well which is a lot harder using traditional spark streaming where to apply some operations we have to work on RDD level. </p>
+<p>So this was a small use case that I could think of which can make use of spark streaming. I hope you found it useful, Thanks for reading the blog and I will see you in the next one.</p>
+<p><strong> Related Links </strong></p>
+<p><a href="https://developerzen.com/best-practices-writing-production-grade-pyspark-jobs-cb688ac4d20f">PySpark Boilerplate - Best Practices Writing Production-Grade PySpark Jobs</a></p>
+<hr>
+<p><strong> DISCLAIMER: </strong> The author doesn't intend to be expert on the problems. While these notes will solve your problem at hand, it is always advised to dig deep to the problem if one is interested and also share
+your further learnings in the comments below as well.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://prakharmishra.com/tag/pyspark.html">pyspark</a>
+    </p>
+  </div>
+
+
+
+
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <ins class="adsbygoogle ads-responsive"
+         data-ad-client="ca-pub-8793729856692815"
+         data-ad-slot="1234566"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+</article>
+
+    <footer>
+<p>&copy; 2021 </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+  <span class="footer-separator">|</span>
+  Switch to the <a href="javascript:void(0)" onclick="theme.switch(`dark`)">dark</a> | <a href="javascript:void(0)" onclick="theme.switch(`light`)">light</a> | <a href="javascript:void(0)" onclick="theme.switch(`browser`)">browser</a> theme
+  <script id="dark-theme-script"
+          src="https://prakharmishra.com/theme/dark-theme/dark-theme.min.js"
+          data-enable-auto-detect-theme="True"
+          data-default-theme="dark"
+          type="text/javascript">
+  </script>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Prakhar Mishra ",
+  "url" : "https://prakharmishra.com",
+  "image": "/images/prakhar.jpeg",
+  "description": "Foo Bar's Thoughts and Writings"
+}
+</script>
+
+    <script>
+      $(document).ready(function() {
+        $('#tipue_search_input').tipuesearch();
+      });
+    </script>
+
+</body>
+</html>
